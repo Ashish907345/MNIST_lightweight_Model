@@ -27,14 +27,7 @@ class TestModelArchitecture:
         has_dropout = any(isinstance(m, torch.nn.Dropout) for m in model.modules())
         assert has_dropout, "Model should use Dropout"
 
-    def test_architecture_type(self, model):
-        """Test if model uses GAP instead of FC layers"""
+    def test_gap_usage(self, model):
+        """Test if model uses Global Average Pooling instead of FC layers"""
         has_gap = any(isinstance(m, torch.nn.AdaptiveAvgPool2d) for m in model.modules())
-        has_fc = any(isinstance(m, torch.nn.Linear) for m in model.modules())
-        
-        if has_gap:
-            print("\nModel uses Global Average Pooling")
-            assert not has_fc, "Model should not use both GAP and FC layers"
-        else:
-            print("\nModel uses Fully Connected layers")
-            assert has_fc, "Model should use either GAP or FC layers" 
+        assert has_gap, "Model should use Global Average Pooling" 

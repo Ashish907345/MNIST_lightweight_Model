@@ -5,6 +5,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torchsummary import summary
+from collections import defaultdict
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
 
@@ -89,6 +90,9 @@ print(f"Total Trainable Parameters: {count_parameters(model)}")
 model = Net().to(device)
 summary(model, input_size=(1, 28, 28))
 from tqdm import tqdm
+
+training_stats = defaultdict(list)
+
 def train(model, device, train_loader, optimizer, epoch):
     model.train()
     pbar = tqdm(train_loader)
@@ -110,20 +114,28 @@ def test(model, device, test_loader):
         for data, target in test_loader:
             data, target = data.to(device), target.to(device)
             output = model(data)
-            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
-            pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
+            test_loss += F.nll_loss(output, target, reduction='sum').item()
+            pred = output.argmax(dim=1, keepdim=True)
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     test_loss /= len(test_loader.dataset)
-
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+    accuracy = 100. * correct / len(test_loader.dataset)
     
+    # Store accuracy
+    training_stats['accuracy'].append(accuracy)
+    
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset), accuracy))
+    
+    return accuracy  # Return accuracy for tracking
 
 model = Net().to(device)
 optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
 
 for epoch in range(1, 20):
     train(model, device, train_loader, optimizer, epoch)
-    test(model, device, test_loader)
+    accuracy = test(model, device, test_loader)
+    training_stats['epoch'].append(epoch)
+
+# Save training stats after training
+torch.save(training_stats, 'training_stats.pth')
