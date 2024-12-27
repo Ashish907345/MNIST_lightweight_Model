@@ -9,23 +9,40 @@ The model uses a modern CNN architecture with the following key features:
 - Dropout for regularization
 - ~16K trainable parameters
 
-## Results
-1	Test set: Average loss: 0.1542, Accuracy: 9615/10000 (96%) 
-2	Test set: Average loss: 0.0842, Accuracy: 9767/10000 (98%) 
-3	Test set: Average loss: 0.0585, Accuracy: 9840/10000 (98%) 
-4	Test set: Average loss: 0.0583, Accuracy: 9819/10000 (98%) 
-5	Test set: Average loss: 0.0453, Accuracy: 9862/10000 (99%) 
-6	Test set: Average loss: 0.0362, Accuracy: 9885/10000 (99%) 
-7	Test set: Average loss: 0.0380, Accuracy: 9866/10000 (99%) 
-8	Test set: Average loss: 0.0287, Accuracy: 9909/10000 (99%) 
-9	Test set: Average loss: 0.0330, Accuracy: 9892/10000 (99%) 
-10	Test set: Average loss: 0.0289, Accuracy: 9900/10000 (99%) 
-11	Test set: Average loss: 0.0261, Accuracy: 9916/10000 (99%) 
-12	Test set: Average loss: 0.0290, Accuracy: 9904/10000 (99%) 
-13	Test set: Average loss: 0.0266, Accuracy: 9902/10000 (99%) 
-14	Test set: Average loss: 0.0245, Accuracy: 9920/10000 (99%) 
-15	Test set: Average loss: 0.0221, Accuracy: 9931/10000 (99%) 
-16	Test set: Average loss: 0.0245, Accuracy: 9925/10000 (99%) 
-17	Test set: Average loss: 0.0228, Accuracy: 9927/10000 (99%) 
-18	Test set: Average loss: 0.0229, Accuracy: 9935/10000 (99%) 
-19	Test set: Average loss: 0.0231, Accuracy: 9929/10000 (99%)
+## 📊 Training Results
+
+| Epoch | Test Loss | Accuracy | Correct/Total |
+|-------|-----------|----------|---------------|
+| 1 | 0.1542 | 96.15% | 9615/10000 |
+| 2 | 0.0842 | 97.67% | 9767/10000 |
+| 3 | 0.0585 | 98.40% | 9840/10000 |
+| 4 | 0.0583 | 98.19% | 9819/10000 |
+| 5 | 0.0453 | 98.62% | 9862/10000 |
+| 6 | 0.0362 | 98.85% | 9885/10000 |
+| 7 | 0.0380 | 98.66% | 9866/10000 |
+| 8 | 0.0287 | 99.09% | 9909/10000 |
+| 9 | 0.0330 | 98.92% | 9892/10000 |
+| 10 | 0.0289 | 99.00% | 9900/10000 |
+| 11 | 0.0261 | 99.16% | 9916/10000 |
+| 12 | 0.0290 | 99.04% | 9904/10000 |
+| 13 | 0.0266 | 99.02% | 9902/10000 |
+| 14 | 0.0245 | 99.20% | 9920/10000 |
+| 15 | 0.0221 | 99.31% | 9931/10000 |
+| 16 | 0.0245 | 99.25% | 9925/10000 |
+| 17 | 0.0228 | 99.27% | 9927/10000 |
+| 18 | 0.0229 | 99.35% | 9935/10000 |
+| 19 | 0.0231 | 99.29% | 9929/10000 |
+
+## 📈 Key Observations
+- **Best Accuracy**: 99.35% (Epoch 18)
+- **Final Accuracy**: 99.29% (Epoch 19)
+- **Convergence**: Model achieves >99% accuracy by epoch 8
+- **Loss Trend**: Steady decrease in test loss from 0.1542 to 0.0231
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.7+
+- PyTorch 1.7+
+- Other dependencies in requirements.txt
+
